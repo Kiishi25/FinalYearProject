@@ -101,6 +101,8 @@ public class GoalActivity extends AppCompatActivity {
        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
 
+
+
    //     inflater= (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         recyclerView = findViewById(R.id.recyclerView);
 
