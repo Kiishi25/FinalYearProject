@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">FYP</string>
+    <string name="Username">Username</string>
+    <string name="email_address">Email address</string>
+    <string name="Password">Password</string>
+    <string name="FirstName">First Name</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="SecondName">Surname</string>
+    <string name="terms"><![CDATA[By continuing, you agree to accept our Privacy Policy & Terms of Service.]]></string>
+    <string name="show_pwd">Show Password?</string>
+    <string name="forgot">Forgot Password?</string>
+    <string name="home">Home</string>
+    <string name="logout">Log Out</string>
+    <string name="Communicate">Communicate</string>
+    <string name="Share">Share</string>
+    <string name="Rate">Rate</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="profile">Profile</string>
+    <string name="chat">Chat</string>
+    <string name="mood">Mood</string>
+    <string name="settings">Settings</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="family">Family</string>
+    <string name="work">Work</string>
+    <string name="school">School</string>
+    <string name="what_caused_this_mood">What Caused This Mood?</string>
+    <string name="journal">Journal</string>
+    <string name="add_goal_header">Add Goal</string>
+    <string name="add_goal_name">Name your Goal</string>
+    <string name="add_goal_period">Choose Goal Period</string>
+    <string name="add_goal_daily">Daily</string>
+    <string name="add_goal_weekly">Weekly</string>
+    <string name="add_goal_monthly">Monthly</string>
+    <string name="add_goal_set">Set your Goal</string>
+    <string name="add_goal_days">Choose Days to Track Goal</string>
+    <string name="add_goal_more">or more times per day</string>
+    <string name="add_goal_less">or fewer times per day</string>
+    <string name="add_goal_submit">Submit</string>
+    <string name="add_goal_sunday">S</string>
+    <string name="add_goal_monday">M</string>
+    <string name="add_goal_tuesday">T</string>
+    <string name="add_goal_wednesday">W</string>
+    <string name="add_goal_thursday">T</string>
+    <string name="add_goal_friday">F</string>
+    <string name="add_goal_saturday">S</string>
+    <string name="speed">Average speed: %1$d steps/min</string>
+    <string name="steps">%1$d</string>
+    <string name="distance">Distance: %1$s m</string>
+    <string name="today">Today</string>
+    <string name="Dis">Set Bar Chart Description Here</string>
+    <string name="track_goals">Track Goals</string>
+    <string name="value">Value</string>
+    <string name="_0">0</string>
+    <string-array name="choice_items">
+        <item>Happy</item>
+        <item>Sad</item>
+        <item>Stressed</item>
+        <item>Excited</item>
+        <item>Nervous</item>
+    </string-array>
+    <string-array name="categories_options">
+
+        <item>Fitness</item>
+        <item>Water</item>
+        <item>Sleep</item>
+        <item>Journal</item>
+        <item>Time Management</item>
+
+    </string-array>
+
+    <string-array name="types">
+
+        <item>Steps</item>
+        <item>Litres</item>
+        <item>Hours</item>
+
+    </string-array>
+</resources>

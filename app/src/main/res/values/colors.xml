@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="DarkerGrey">#A9A9A9</color>
+    <color name="White">#FFFFFF</color>
+    <color name="colorBlue">#3A5998</color>
+    <color name="darkBlue">#2F53CD</color>
+    <color name="black">#000000</color>
+    <color name="dailyscreen">#F4F6B4C2</color>
+    <color name="bground_light_purple">#F3C471B1</color>
+    <color name="bground_light_pink">#E8929A</color>
+
+    <color name="tab_indicator">#000000</color>
+    <color name="intoTitle">#808080</color>
+    <color name="into_description">#A9A9A9</color>
+
+    <!-- colours for button style -->
+    <color name="start">#0000FF</color>
+    <color name="end">	#008080</color>
+
+</resources>

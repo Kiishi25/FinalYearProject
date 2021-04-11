@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background4"
+    tools:context=".MainActivity">
+
+
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="283dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="95dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="center"
+        android:text="Welcome to Safe Space"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/signIn"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcome"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="serif-monospace"
+        android:text="Log in"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/lg_emailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/welcome"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_email_icon"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/lg_emailAddress"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_lock_icon"
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="365dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/login_button"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="LOGIN"
+        android:textColor="@color/White" />
+
+
+    <Button
+        android:id="@+id/google"
+        android:layout_width="365dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/custom_input"
+        android:drawableLeft="@drawable/google_logo"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="LOGIN WITH GOOGLE" />
+
+    <Button
+        android:id="@+id/facebook"
+        android:layout_width="365dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="217dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/facebook_button"
+        android:drawableLeft="@drawable/facebook_logo"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="LOGIN WITH FACEBOOK"
+        android:textColor="@color/White" />
+
+    <CheckBox
+        android:id="@+id/show_hide_password"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/show_pwd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/forgotPassword"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginLeft="214dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="serif-monospace"
+        android:text="@string/forgot"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="357dp"
+        android:layout_height="85dp"
+        android:layout_below="@+id/facebook"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="arial"
+        android:text="Don’t have an account? "
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/reg"
+        android:layout_width="138dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/facebook"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="251dp"
+        android:layout_marginLeft="251dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="arial"
+        android:text="Sign Up "
+        android:textColor="@color/darkBlue"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ProgressBar
+
+        android:id="@+id/progress_bar"
+        android:layout_width="57dp"
+        android:layout_height="52dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>
