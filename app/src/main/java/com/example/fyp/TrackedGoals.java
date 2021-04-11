@@ -6,6 +6,9 @@ public class TrackedGoals {
     int value;
     String goalId;
 
+
+
+    
     public String getGoalId() {
         return goalId;
     }
@@ -13,8 +16,6 @@ public class TrackedGoals {
     public void setGoalId(String goalId) {
         this.goalId = goalId;
     }
-
-
 
 
     public TrackedGoals(){
