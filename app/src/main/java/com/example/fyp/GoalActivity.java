@@ -100,11 +100,7 @@ public class GoalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
-     //   spinner = (Spinner) findViewById(R.id.categoriesSpinner);
 
-
-
-       // goalsData=new ArrayList<>();
    //     inflater= (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         recyclerView = findViewById(R.id.recyclerView);
 
