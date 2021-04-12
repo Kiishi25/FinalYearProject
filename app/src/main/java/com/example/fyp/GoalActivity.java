@@ -137,6 +137,22 @@ public class GoalActivity extends AppCompatActivity {
        // Query query = databaseGoalInfo.child("GoalInfo");
         databaseGoalInfo = FirebaseDatabase.getInstance().getReference("GoalInfo").child(userId);
 
+        databaseGoalInfo.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot data1 : snapshot.getChildren()){
+
+                    String value = String.valueOf(data1.child("names").getValue());
+                    Log.i("Value", value);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<Goals> options
                 = new FirebaseRecyclerOptions.Builder<Goals>()
