@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.ViewHolder> {
@@ -28,6 +29,7 @@ public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.Vi
     public GoalsAdapter(FirebaseRecyclerOptions<Goals>  goalList) {
         super(goalList);
       //  this.goalList = goalList;
+      //  goalList = new FirebaseRecyclerOptions<Goals>();
     }
 
 
@@ -47,21 +49,31 @@ public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.Vi
 
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Goals model) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, final int position, @NonNull Goals model) {
         holder.name.setText( "Name:" + " " + model.getNames());
         holder.period.setText("Period:" + " " + model.getPeriod());
         holder.period.setText("type:" + " " + model.getType());
-     //   Log.i(TAG, "Mood" + String.valueOf(model.getNames()));
+
+holder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Goals goal = goalList.get(position);
+     //   Intent intent = new Intent (context, TrackedGoalActivity.class);
+      //  intent.putExtra("userid,", goal.getId());
+    }
+});
+        //   Log.i(TAG, "Mood" + String.valueOf(model.getNames()));
 
     }
 
 
    // public int getItemCount() {
-   //     return goalList.size();
+   //    return goalList.size();
 
 
 
- //   }
+  //}
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;

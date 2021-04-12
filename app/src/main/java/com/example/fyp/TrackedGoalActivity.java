@@ -1,5 +1,6 @@
 package com.example.fyp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,8 +25,11 @@ import com.github.naz013.awcalendar.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.events.Event;
 
 import java.text.SimpleDateFormat;
@@ -59,13 +63,13 @@ public class TrackedGoalActivity extends AppCompatActivity {
         // user = findViewById(R.id.user);
         button = findViewById(R.id.button);
 
-      //  Intent intent = getIntent();
+        //  Intent intent = getIntent();
 
-      //  if (intent.getExtras() != null) {
-      //      Goals goal = (Goals) intent.getSerializableExtra("data");
+        //  if (intent.getExtras() != null) {
+        //      Goals goal = (Goals) intent.getSerializableExtra("data");
 
-       //     user.setText(goal.getNames());
-     //   }
+        //     user.setText(goal.getNames());
+        //   }
 
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser rUser = fAuth.getCurrentUser();
@@ -74,29 +78,29 @@ public class TrackedGoalActivity extends AppCompatActivity {
 
         //  adapter= new GoalsAdapter(getDataSetHistory(), GoalActivity.this);
         // Query query = databaseGoalInfo.child("GoalInfo");
-        databaseGoalInfo = FirebaseDatabase.getInstance().getReference("GoalInfo").child(userId);
+        databaseGoalInfo = FirebaseDatabase.getInstance().getReference("TrackedGoals").child(userId);
 
         // query in the database to fetch appropriate data
 
 
 
 
-                submit = findViewById(R.id.su);
-                submit.setOnClickListener(new View.OnClickListener() {
+        submit = findViewById(R.id.su);
+        submit.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-                        EditText number = (EditText) findViewById(R.id.value);
-                        value = Integer.valueOf(number.getText().toString());
-                        EditText dates = (EditText) findViewById(R.id.date_in);
-                        date = dates.getText().toString();
-                        sendUserData();
-                        setContentView(R.layout.activity_tracked_goal);
-                    }
-                });
-
+                EditText number = (EditText) findViewById(R.id.value);
+                value = Integer.valueOf(number.getText().toString());
+                EditText dates = (EditText) findViewById(R.id.date_in);
+                date = dates.getText().toString();
+                sendUserData();
+                setContentView(R.layout.activity_tracked_goal);
             }
+        });
+
+    }
 
 
 
@@ -106,12 +110,18 @@ public class TrackedGoalActivity extends AppCompatActivity {
 
 
         // Collect information and key for new goal
-        TrackedGoals goals = new TrackedGoals(date, value);
+        String goalId = databaseGoalInfo.child(fAuth.getUid()).push().getKey();
+        Intent intent = getIntent();
 
-       // String goalId = databaseGoalInfo.child(fAuth.getUid()).push().getKey();
+        final String userid = intent.getStringExtra("userid");
+       TrackedGoals g = new TrackedGoals();
+
+        TrackedGoals goals = new TrackedGoals(g.getGoalId(),date, value);
+
+        // String goalId = databaseGoalInfo.child(fAuth.getUid()).push().getKey();
         Log.i(TAG, "Mood" + String.valueOf(goals.getDate() + goals.getValue()));
         // Submit
-        databaseGoalInfo.child("TrackedGoals").setValue(goals);
+        databaseGoalInfo.setValue(goals);
 
         Toast.makeText(TrackedGoalActivity.this, "Database Updated", Toast.LENGTH_SHORT).show();
     }

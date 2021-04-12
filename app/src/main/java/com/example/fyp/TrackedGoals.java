@@ -4,16 +4,17 @@ public class TrackedGoals {
 
     String date;
     int value;
-    String goalId;
+    public Goals goalId;
 
 
 
 
-    public String getGoalId() {
+    public Goals getGoalId() {
+
         return goalId;
     }
 
-    public void setGoalId(String goalId) {
+    public void setGoalId(Goals goalId) {
         this.goalId = goalId;
     }
 
@@ -23,7 +24,7 @@ public class TrackedGoals {
 
     }
 
-    public TrackedGoals( String date, int value) {
+    public TrackedGoals(Goals goalId, String date, int value) {
         this.date = date;
         this.value = value;
         this.goalId = goalId;
