@@ -87,6 +87,7 @@ public class GoalActivity extends AppCompatActivity {
     String startDate;
     String endDate;
     Spinner measure;
+   // String goalId;
     //we will use these constants later to pass the artist name and id to another activity
     public static final String GOAL_NAME = "come.example.Id";
   //  public static final String ARTIST_ID = "net.simplifiedcoding.firebasedatabaseexample.artistid";
@@ -107,7 +108,7 @@ public class GoalActivity extends AppCompatActivity {
         //     inflater= (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         recyclerView = findViewById(R.id.recyclerView);
 
-
+        // goalId = databaseGoalInfo.child(firebaseAuth.getUid()).push().getKey();
         //   recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(GoalActivity.this);
         linearLayoutManager.setReverseLayout(true);
@@ -142,8 +143,8 @@ public class GoalActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot data1 : snapshot.getChildren()){
 
-                    String value = String.valueOf(data1.child("id").getValue());
-                    Log.i("Value", value);
+                 //   goalId = String.valueOf(data1.child("id").getValue());
+                 //   Log.i("Value", goalId);
                 }
             }
 

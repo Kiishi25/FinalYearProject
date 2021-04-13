@@ -53,11 +53,12 @@ public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.Vi
         holder.name.setText( "Name:" + " " + model.getNames());
         holder.period.setText("Period:" + " " + model.getPeriod());
         holder.period.setText("type:" + " " + model.getType());
+        holder.id.setText( model.getId());
 
 holder.itemView.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Goals goal = goalList.get(position);
+//        Goals goal = goalList.get(position);
      //   Intent intent = new Intent (context, TrackedGoalActivity.class);
       //  intent.putExtra("userid,", goal.getId());
     }
@@ -79,6 +80,7 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
         TextView name;
         TextView period;
         TextView type;
+        TextView id;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,12 +89,14 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
             period = (TextView)itemView.findViewById(R.id.period);
             type = (TextView)itemView.findViewById(R.id.type);
             goals = (Button) itemView.findViewById(R.id.button);
+            id = (TextView) itemView.findViewById(R.id.id);
          //   desc = itemView.findViewById(R.id.desc);
             goals.setOnClickListener(new View.OnClickListener() {
                 @Override
                public void onClick(View v) {
                     Context context = v.getContext();
                    Intent intent = new Intent(context, TrackedGoalActivity.class);
+                    intent.putExtra("userid",id.getText());
                   context.startActivity(intent);
                }
             });

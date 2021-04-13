@@ -2,21 +2,11 @@ package com.example.fyp;
 
 public class TrackedGoals {
 
-    String date;
-    int value;
-    public Goals goalId;
+   private String date;
+  private  int value;
+   private String userid;
 
 
-
-
-    public Goals getGoalId() {
-
-        return goalId;
-    }
-
-    public void setGoalId(Goals goalId) {
-        this.goalId = goalId;
-    }
 
 
     public TrackedGoals(){
@@ -24,13 +14,21 @@ public class TrackedGoals {
 
     }
 
-    public TrackedGoals(Goals goalId, String date, int value) {
+    public TrackedGoals(String userid, String date, int value) {
         this.date = date;
         this.value = value;
-        this.goalId = goalId;
+        this.userid = userid;
+     //   this.goalId = goalId;
+
     }
 
+    public String getUserid() {
+        return userid;
+    }
 
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
     public String getDate() {
         return date;
     }

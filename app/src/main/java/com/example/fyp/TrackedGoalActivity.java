@@ -53,7 +53,8 @@ public class TrackedGoalActivity extends AppCompatActivity {
     int value;
 
     String date;
-    FirebaseAuth fAuth;
+    FirebaseUser rUser;
+            FirebaseAuth fAuth;
     DatabaseReference databaseGoalInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +73,15 @@ public class TrackedGoalActivity extends AppCompatActivity {
         //   }
 
         fAuth = FirebaseAuth.getInstance();
-        FirebaseUser rUser = fAuth.getCurrentUser();
+        rUser = fAuth.getCurrentUser();
         assert rUser != null;
-        final String userId = rUser.getUid();
+
 
         //  adapter= new GoalsAdapter(getDataSetHistory(), GoalActivity.this);
         // Query query = databaseGoalInfo.child("GoalInfo");
-        databaseGoalInfo = FirebaseDatabase.getInstance().getReference("TrackedGoals").child(userId);
+        databaseGoalInfo = FirebaseDatabase.getInstance().getReference("TrackedGoals");
+
+
 
         // query in the database to fetch appropriate data
 
@@ -111,17 +114,24 @@ public class TrackedGoalActivity extends AppCompatActivity {
 
         // Collect information and key for new goal
         String goalId = databaseGoalInfo.child(fAuth.getUid()).push().getKey();
+        final String userId = rUser.getUid();
         Intent intent = getIntent();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+           // String values = extras.getString("goalid");
+          //  Log.i("Tracked Goal Acc", values);
+            //The key argument here must match that used in the other activity
+        }
 
-        final String userid = intent.getStringExtra("userid");
+         String userid = intent.getStringExtra("userid");
        TrackedGoals g = new TrackedGoals();
 
-        TrackedGoals goals = new TrackedGoals(g.getGoalId(),date, value);
+        TrackedGoals goals = new TrackedGoals(userId,date, value);
 
         // String goalId = databaseGoalInfo.child(fAuth.getUid()).push().getKey();
         Log.i(TAG, "Mood" + String.valueOf(goals.getDate() + goals.getValue()));
         // Submit
-        databaseGoalInfo.setValue(goals);
+        databaseGoalInfo.child(userid).setValue(goals);
 
         Toast.makeText(TrackedGoalActivity.this, "Database Updated", Toast.LENGTH_SHORT).show();
     }
