@@ -49,7 +49,7 @@ LinearLayout mood;
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MoodHistoryActivity.class);
+                Intent intent = new Intent(getActivity(), GoalHistoryActivity.class);
                 startActivity(intent);
 
             }

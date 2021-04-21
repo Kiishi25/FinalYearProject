@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -89,12 +91,12 @@ public class GoalActivity extends AppCompatActivity {
     Spinner measure;
    // String goalId;
     //we will use these constants later to pass the artist name and id to another activity
-    public static final String GOAL_NAME = "come.example.Id";
-  //  public static final String ARTIST_ID = "net.simplifiedcoding.firebasedatabaseexample.artistid";
+
     DatePickerSpinner spinners;
     // Button submit;
     Button button;
 
+    Dialog dialog;
     //    String test;
     //Map<String, Boolean> checks = new HashMap<>();
 
@@ -107,6 +109,9 @@ public class GoalActivity extends AppCompatActivity {
 
         //     inflater= (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
         recyclerView = findViewById(R.id.recyclerView);
+     //   dialog=new DatePickerDialog();
+
+    //    Query query = refpetrol.child("Data").orderByChild("timestamp").startAt(startmonth).endAt(endmonth);
 
         // goalId = databaseGoalInfo.child(firebaseAuth.getUid()).push().getKey();
         //   recyclerView.setHasFixedSize(true);
@@ -138,6 +143,28 @@ public class GoalActivity extends AppCompatActivity {
         //  adapter= new GoalsAdapter(getDataSetHistory(), GoalActivity.this);
         // Query query = databaseGoalInfo.child("GoalInfo");
         databaseGoalInfo = FirebaseDatabase.getInstance().getReference("GoalInfo").child(userId);
+
+         final Query query = databaseGoalInfo.orderByChild("type").equalTo("Fitness");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    Goals goal = childSnapshot.getValue(Goals.class);
+
+                    if(goal.getMeasure().equalsIgnoreCase("Steps")) {
+                        // Here is your desired location
+                        String value = String.valueOf(childSnapshot.child("period").getValue());
+                        Log.i("Value", String.valueOf(query));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        /*
         databaseGoalInfo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -153,6 +180,8 @@ public class GoalActivity extends AppCompatActivity {
 
             }
         });
+
+         */
 
 
 
@@ -294,50 +323,7 @@ public class GoalActivity extends AppCompatActivity {
     }
 
     /** Called when the user clicks the submit button */
-/*
-    public void onSubmit(View view) {
-        // Get goal name
-        EditText nameGoalEditText = (EditText) findViewById(R.id.nameGoalEditText);
-        goalName = nameGoalEditText.getText().toString();
-      // Spinner spin = (Spinner) findViewById(R.id.categoriesSpinner);
-      //  type = spinner.getSelectedItem().toString();
-     //   System.out.println(type);
-        EditText startDateEdit = (EditText) findViewById(R.id.sd_in);
-        startDate = startDateEdit.getText().toString();
-        EditText endDateEdit = (EditText) findViewById(R.id.ed_in);
-        endDate = endDateEdit.getText().toString();
-        EditText number = (EditText) findViewById(R.id.num);
-        num = Integer.valueOf(number.getText().toString());
-        // Get goal period
-        ChipGroup chg = (ChipGroup) findViewById(R.id.goalPeriodChipGroup);
-        int chipId = chg.getCheckedChipId();
-        Chip periodChip = (Chip) findViewById(chg.getCheckedChipId());
-        period = periodChip.getText().toString();
-        // Get goal
-//        EditText numberEditText = (EditText) findViewById(R.id.goalNumberEditText);
-      //  num = Integer.parseInt(numberEditText.getText().toString());
-        // Get selected less/more radio button
-   ////     orMore = true;
-    ///    RadioGroup rgrp = (RadioGroup) findViewById(R.id.moreLessRadioGroup);
-    //    if (rgrp.getCheckedRadioButtonId() != R.id.moreRadioButton) {
-    //        orMore = false;
-   //     }
-        // Record selected days (bit string: i.e. SMTWTFS --> 0011000)
-      //  type = spinner.getSelectedItem().toString();
-        //type  = spinner.getSelectedItem().toString();
-      //  Toast.makeText(GoalActivity.this,type + " selected!", Toast.LENGTH_SHORT).show();
-        // Initialize the checks dict with the date
-     //   date = new Date();
-      //  dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-     //   String day = dateFormat.format(date);
-    //    checks.put(day, new Boolean(false)); //Set initially to false so they can check it off
-        // Add new goal
-        sendUserData();
-        // Redirect to main page
-      //  Intent intent = new Intent(this, MainActivity.class);
-    //    startActivity(intent);
-    }
- */
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu, menu);

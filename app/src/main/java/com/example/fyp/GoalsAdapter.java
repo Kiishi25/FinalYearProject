@@ -96,7 +96,7 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
                public void onClick(View v) {
                     Context context = v.getContext();
                    Intent intent = new Intent(context, TrackedGoalActivity.class);
-                    intent.putExtra("userid",id.getText());
+                    intent.putExtra("goalid",id.getText());
                   context.startActivity(intent);
                }
             });

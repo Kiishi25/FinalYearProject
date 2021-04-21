@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GoalHistoryActivity"></activity>
         <activity android:name=".TrackedGoalActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -4,7 +4,7 @@ public class TrackedGoals {
 
    private String date;
   private  int value;
-   private String userid;
+ //  private String userid;
 
 
 
@@ -14,21 +14,21 @@ public class TrackedGoals {
 
     }
 
-    public TrackedGoals(String userid, String date, int value) {
+    public TrackedGoals( String date, int value) {
         this.date = date;
         this.value = value;
-        this.userid = userid;
+        //this.userid = userid;
      //   this.goalId = goalId;
 
     }
 
-    public String getUserid() {
-        return userid;
-    }
+   // public String getUserid() {
+    //    return userid;
+  //  }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
+  //  public void setUserid(String userid) {
+  //      this.userid = userid;
+  //  }
     public String getDate() {
         return date;
     }
