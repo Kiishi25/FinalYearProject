@@ -34,62 +34,7 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <RadioButton
-        android:id="@+id/work"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/mood_cause"
-        android:text="Work"
-        android:layout_marginTop="20dp"
 
-        android:textSize="20dp" />
-
-    <RadioButton
-        android:id="@+id/school"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="School"
-        android:layout_below="@+id/work"
-
-        android:textSize="20dp" />
-
-
-    <TextView
-        android:id="@+id/journal"
-        android:layout_width="match_parent"
-        android:layout_height="114dp"
-        android:layout_below="@+id/school"
-        android:layout_marginTop="13dp"
-        android:fontFamily="serif-monospace"
-        android:gravity="center"
-        android:text="@string/journal"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="240dp"
-        android:layout_height="117dp"
-        android:layout_below="@+id/journal"
-        android:layout_marginTop="1dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/journal"
-        android:layout_gravity="bottom|end"
-        android:layout_marginLeft="290dp"
-        android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/ic_edit"
-        tools:ignore="VectorDrawableCompat" />
 
 
 </RelativeLayout>

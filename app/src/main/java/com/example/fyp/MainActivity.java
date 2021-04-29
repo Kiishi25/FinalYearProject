@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     if (inputAddress.trim().matches(emailPattern)) {
-                        Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(MainActivity.this, "Invalid Email Address!", Toast.LENGTH_SHORT).show();
@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            Toast.makeText(MainActivity.this, "User was logined in successfully!!",
-                                    Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(MainActivity.this, "User was logined in successfully!!",
+                            //        Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
 

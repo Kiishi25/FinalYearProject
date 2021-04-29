@@ -3,6 +3,8 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -61,10 +65,17 @@ public class MoodHistoryActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     int feeling;
     String date;
+    Mood mood;
+
    // ValueEventListener valueEventListener;
     ArrayList<Integer> array2; //array for mood value
     ArrayList<String> array7; //array for date
     private String TAG = "History";
+    BarChart barChart;
+    private ArrayList<Mood> MoodArray;
+    private DrawerLayout drawer;
+
+
 
 
 
@@ -73,11 +84,11 @@ public class MoodHistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mood_history);
        // mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
         fAuth = FirebaseAuth.getInstance();
-        BarChart barChart = (BarChart) findViewById(R.id.chart);
-
+        barChart = (BarChart) findViewById(R.id.barchart);
+        MoodArray = new ArrayList<Mood>();
 
         FirebaseUser rUser = fAuth.getCurrentUser();
         assert rUser != null;
@@ -88,13 +99,47 @@ public class MoodHistoryActivity extends AppCompatActivity {
         mRatingBarCh.addValueEventListener (new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()) {
 
-                   int feel = ds.child("Feel").getValue(Integer.class);
-                   Log.i(TAG, "Feel" + String.valueOf(feel));
+                for (DataSnapshot ds : snapshot.getChildren()) {
+
+                    //  String id = Integer.parseInt(ds.child("feel").getValue().toString());
+                    String value = String.valueOf(ds.child("date").getValue());
+               //   int feel = Integer.parseInt(String.valueOf(ds.child("feel").getValue()));
+                    //   String name = data1.child("type").getValue().toString();
+                    int values = Integer.parseInt(ds.child("feel").getValue().toString());
+                    mood = new Mood(value,values);
+                    // goalsArray.add(goals);
+                    //goalsArray.add(goals);
+                    //  hashSet.add(goals);
+                    /// Goals goal= data1.getValue(Goals.class);
+                    //  hashSet.add(goal.getType());
+
+                    MoodArray.add(mood);
+
+                    Log.i("id", value);
+                    Log.i("ni", String.valueOf(values));
+                 //   Log.i("id", String.valueOf(feel));
 
 
                 }
+                ArrayList<BarEntry> entries = new ArrayList<>();
+                final ArrayList<String> labels = new ArrayList<String>();
+
+                for (int i = 0; i < MoodArray.size(); i++) {
+                    String date = MoodArray.get(i).getDate();
+                    int value = MoodArray.get(i).getFeel();
+                    entries.add(new BarEntry(value, i));
+                    labels.add(date);
+                    Log.i("label", String.valueOf(labels));
+                    Log.i("Date", String.valueOf(date));
+                    Log.i("Feel", String.valueOf(value));
+                }
+                BarDataSet bardataset = new BarDataSet(entries, "Cells");
+                BarData data = new BarData(labels, bardataset);
+                barChart.setData(data); // set the data and list of labels into chart
+                barChart.setDescription("Mood Graph");  // set the description
+                bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                barChart.animateY(5000);
             }
 
             @Override
@@ -159,6 +204,7 @@ public class MoodHistoryActivity extends AppCompatActivity {
 
          }
 
-    }
+
+}
 
 

@@ -52,7 +52,9 @@ public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.Vi
     protected void onBindViewHolder(@NonNull ViewHolder holder, final int position, @NonNull Goals model) {
         holder.name.setText( "Name:" + " " + model.getNames());
         holder.period.setText("Period:" + " " + model.getPeriod());
-        holder.period.setText("type:" + " " + model.getType());
+       // holder.period.setText("type:" + " " + model.getType());
+       /// holder.period.setText("type:" + " " + model.getType());
+        holder.num.setText("type:" + " " + model.getNumber());
         holder.id.setText( model.getId());
 
 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +83,8 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
         TextView period;
         TextView type;
         TextView id;
+        TextView num;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +94,7 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
             type = (TextView)itemView.findViewById(R.id.type);
             goals = (Button) itemView.findViewById(R.id.button);
             id = (TextView) itemView.findViewById(R.id.id);
+            num = (TextView) itemView.findViewById(R.id.numbers);
          //   desc = itemView.findViewById(R.id.desc);
             goals.setOnClickListener(new View.OnClickListener() {
                 @Override

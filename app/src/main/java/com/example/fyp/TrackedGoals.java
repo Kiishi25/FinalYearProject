@@ -9,8 +9,8 @@ public class TrackedGoals {
 
 
 
-    public TrackedGoals(){
-
+    public TrackedGoals(String date){
+        this.date = date;
 
     }
 

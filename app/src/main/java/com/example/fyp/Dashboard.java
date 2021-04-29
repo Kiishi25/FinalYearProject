@@ -6,24 +6,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class Dashboard extends Fragment {
-LinearLayout goals;
-LinearLayout mood;
-    LinearLayout history;
+RelativeLayout goals;
+    RelativeLayout mood;
+    RelativeLayout history;
+    RelativeLayout profile;
+    RelativeLayout journal;
+    RelativeLayout moodHistory;
 
 
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.dashboard, container, false);
-        goals = (LinearLayout) rootView.findViewById(R.id.chat);
+        goals = (RelativeLayout) rootView.findViewById(R.id.chat);
 
-        mood = (LinearLayout) rootView.findViewById(R.id.mood);
-        history = (LinearLayout) rootView.findViewById(R.id.sleep);
-
+        mood = (RelativeLayout) rootView.findViewById(R.id.mood);
+        history = (RelativeLayout) rootView.findViewById(R.id.sleep);
+        profile = (RelativeLayout) rootView.findViewById(R.id.profile);
+        journal = (RelativeLayout) rootView.findViewById(R.id.journal);
+        moodHistory = (RelativeLayout) rootView.findViewById(R.id.moodHistory);
 
 
 
@@ -36,6 +42,23 @@ LinearLayout mood;
               //  onBackPressed();
             }
         });
+        moodHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MoodHistoryActivity.class);
+                startActivity(intent);
+                //  onBackPressed();
+            }
+        });
+        journal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddJournalActivity.class);
+                startActivity(intent);
+                //  onBackPressed();
+            }
+        });
+
 
         mood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +66,14 @@ LinearLayout mood;
                 Intent intent = new Intent(getActivity(), CalenderActivity.class);
                 startActivity(intent);
              //   onBackPressed();
+            }
+        });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileViewActivity.class);
+                startActivity(intent);
+                //   onBackPressed();
             }
         });
 

@@ -15,12 +15,15 @@ public String id;
     public String measure;
 
 
+
     public Goals() {
     }
 
 
 
-
+    public Goals(String type) {
+        this.type = type;
+    }
 
     public String getMeasure() {
         return measure;
@@ -106,6 +109,10 @@ public String id;
         this.period = period;
     }
 
+    public String toString()
+    {
+        return id + ", " + type + ", ";
+    }
 
 }
 

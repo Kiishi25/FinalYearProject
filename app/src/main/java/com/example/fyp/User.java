@@ -12,11 +12,12 @@ public class User {
         this.Lname = Lname;
         this.email = email;
 
+    }
+    public User(){
 
 
 
     }
-
     public void setFName(String name) {
         this.Fname = name;
     }

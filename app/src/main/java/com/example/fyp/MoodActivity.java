@@ -56,6 +56,7 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
     String todaysDate;
     String currentTime;
     RadioButton cause;
+    RadioButton work;
     private TextView tvDisplayChoice;
     String weekDay;
     String stringdate;
@@ -147,14 +148,7 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         // HashMap<String, String> hashMap = new HashMap<>();
         // mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
         //  mRatingBarCh.child("Mood");
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(MoodActivity.this, AddJournalActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
 
@@ -196,6 +190,7 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
     @Override
     public void onPositiveButtonClicked(String[] list, int position) {
         mRatingBarCh.child("feel").setValue(position);
+
 
     }
 
