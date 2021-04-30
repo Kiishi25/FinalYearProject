@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class AddJournalActivity extends AppCompatActivity {
     DatabaseReference myRef;
     FloatingActionButton save;
     FloatingActionButton create;
+    Button submit;
 
 
     Calendar c;
@@ -65,6 +67,15 @@ public class AddJournalActivity extends AppCompatActivity {
         setContentView(R.layout.journal);
 
         recyclerView = findViewById(R.id.rv);
+
+
+        grateful = (EditText) findViewById(R.id.grateful);
+        reason = (EditText) findViewById(R.id.reason);
+        different = (EditText) findViewById(R.id.different);
+        today = (EditText) findViewById(R.id.today);
+        save = findViewById(R.id.save);
+        submit = (Button) findViewById(R.id.st);
+        create = findViewById(R.id.fabb);
 
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser rUser = fAuth.getCurrentUser();
@@ -92,27 +103,21 @@ public class AddJournalActivity extends AppCompatActivity {
         // Connecting object of required Adapter class to
         // the Adapter class itself
 
-
         adapter = new JournalAdapter(options);
         recyclerView.setAdapter(adapter);
         recyclerView.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
-        grateful = findViewById(R.id.grateful);
-        reason = findViewById(R.id.reason);
-        different = findViewById(R.id.different);
-       today = findViewById(R.id.today);
-        save = findViewById(R.id.save);
-        create = findViewById(R.id.fabb);
 
-      //  fAuth = FirebaseAuth.getInstance();
-create.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        setContentView(R.layout.activity_add_journal);
 
-    }
-});
+        //  fAuth = FirebaseAuth.getInstance();
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_add_journal);
 
+            }
+
+            });
 
     }
 
@@ -127,7 +132,7 @@ create.setOnClickListener(new View.OnClickListener() {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case R.id.save:
-                addJournal(grateful.getText().toString(), reason.getText().toString(), different.getText().toString(),today.getText().toString());
+               addJournal(grateful.getText().toString(), reason.getText().toString(), different.getText().toString(),today.getText().toString());
                 onBackPressed();
                 break;
 
@@ -161,6 +166,7 @@ create.setOnClickListener(new View.OnClickListener() {
         hashMap.put("grateful",grateful);
         hashMap.put("reason", reason);
         hashMap.put("different", different);
+        hashMap.put("today", today);
         hashMap.put("date", todaysDate);
 
 

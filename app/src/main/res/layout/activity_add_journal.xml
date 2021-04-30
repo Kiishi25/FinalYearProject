@@ -70,5 +70,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/today" />
 
+    <Button
+        android:id="@+id/st"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textColor="#000"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="521dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

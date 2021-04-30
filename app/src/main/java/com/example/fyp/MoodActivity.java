@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,7 +57,7 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
     Calendar c;
     String todaysDate;
     String currentTime;
-    RadioButton cause;
+  String cause;
     RadioButton work;
     private TextView tvDisplayChoice;
     String weekDay;
@@ -70,7 +72,7 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         Button btnSelectChoice = findViewById(R.id.btnSelectChoice);
       //  mSmileRating = findViewById(R.id.ratingView);
         recyclerView = findViewById(R.id.recyclerView);
-        cause = findViewById(R.id.school);
+        //cause = findViewById(R.id.school);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -117,6 +119,11 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         assert rUser != null;
         String userId = rUser.getUid();
 
+        ChipGroup chg = (ChipGroup) findViewById(R.id.moodChipGroup);
+       // int chipId = chg.getCheckedChipId();
+        Chip periodChip = (Chip) findViewById(chg.getCheckedChipId());
+        cause = periodChip.getText().toString();
+
         mRatingBarCh = FirebaseDatabase.getInstance().getReference("Mood").child(userId);
         String key = mRatingBarCh.push().getKey();
         mRatingBarCh = mRatingBarCh.child(key);
@@ -125,10 +132,9 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         // hashMap.put("timestamp", ServerValue.TIMESTAMP);
      //   hashMap.put("date", weekDay);
        hashMap.put("date", stringdate);
-        if(cause.isChecked()) {
-            hashMap.put("Cause", cause);
-          //  hashMap.put("female", checkFemale);
-        }
+       hashMap.put("cause",cause);
+
+
         mRatingBarCh.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

@@ -34,7 +34,89 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/moodChipGroup"
+        android:layout_width="395dp"
+        android:layout_height="197dp"
+        android:layout_below="@+id/mood_cause"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:chipSpacing="0dp"
+        app:chipSpacingHorizontal="80dp"
+        app:singleSelection="true">
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/SchoolChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Relationship"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/weeklyChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Family"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/monthlyChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Money"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/SleepyChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sleep"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/HealthChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/SelfChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Self-love"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/FamilyChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Family"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/IdentityChip"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Identity"
+            android:theme="@style/Theme.MaterialComponents.Light" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/moodChipGroup"
+        android:layout_marginBottom="-49dp"
+        android:text="Submit"
+        android:textColor="#000" />
 
 
 </RelativeLayout>

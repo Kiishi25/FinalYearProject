@@ -104,10 +104,10 @@ public class MoodHistoryActivity extends AppCompatActivity {
 
                     //  String id = Integer.parseInt(ds.child("feel").getValue().toString());
                     String value = String.valueOf(ds.child("date").getValue());
-               //   int feel = Integer.parseInt(String.valueOf(ds.child("feel").getValue()));
+                    //   int feel = Integer.parseInt(String.valueOf(ds.child("feel").getValue()));
                     //   String name = data1.child("type").getValue().toString();
                     int values = Integer.parseInt(ds.child("feel").getValue().toString());
-                    mood = new Mood(value,values);
+                    mood = new Mood(value, values);
                     // goalsArray.add(goals);
                     //goalsArray.add(goals);
                     //  hashSet.add(goals);
@@ -118,7 +118,7 @@ public class MoodHistoryActivity extends AppCompatActivity {
 
                     Log.i("id", value);
                     Log.i("ni", String.valueOf(values));
-                 //   Log.i("id", String.valueOf(feel));
+                    //   Log.i("id", String.valueOf(feel));
 
 
                 }
@@ -138,7 +138,8 @@ public class MoodHistoryActivity extends AppCompatActivity {
                 BarData data = new BarData(labels, bardataset);
                 barChart.setData(data); // set the data and list of labels into chart
                 barChart.setDescription("Mood Graph");  // set the description
-                bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                bardataset.setColors(new int[]{Color.RED, Color.GREEN, Color.GRAY, Color.BLACK, Color.BLUE});
+                ;
                 barChart.animateY(5000);
             }
 

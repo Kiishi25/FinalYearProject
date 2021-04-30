@@ -26,7 +26,7 @@ public class CalenderActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
     FirebaseDatabase database;
     DatabaseReference myRef;
-
+    long eventOccursOn;
 
 
 
@@ -49,6 +49,7 @@ compactCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() 
 
         startActivity(new Intent(CalenderActivity.this, MoodActivity.class));
     }
+
 });
         // compactCalendar.setUseThreeLetterAbbreviation(true);
 

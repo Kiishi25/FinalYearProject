@@ -3,6 +3,7 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,8 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 //import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,9 +53,11 @@ public class MainActivity extends AppCompatActivity {
     Button google;
     ProgressBar progressBar;
     CheckBox box;
-//    private GoogleSignInClient mGoogleSignInClient;
+    //  private GoogleSignInClient mGoogleSignInClient;
     private  String TAG = "MainActivity";
     private int RC_SIGN_IN = 1;
+    GoogleSignInClient  googleSignInClient;
+
 /*
     @Override
     protected void onStart() {
@@ -86,11 +91,13 @@ public class MainActivity extends AppCompatActivity {
         box = (CheckBox) findViewById(R.id.show_hide_password) ;
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken("639003174671-kg8t92ksf88br3m170t6v8f93p9lb4hc.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 
-    //    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient = GoogleSignIn.getClient(MainActivity.this, gso);
+
+        //    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     if (inputAddress.trim().matches(emailPattern)) {
-                    //    Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(MainActivity.this, "Invalid Email Address!", Toast.LENGTH_SHORT).show();
@@ -123,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                         //   Toast.makeText(MainActivity.this, "User was logined in successfully!!",
+                            //   Toast.makeText(MainActivity.this, "User was logined in successfully!!",
                             //        Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
@@ -147,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (v.getId()){
                     case R.id.reg:
                         startActivity(new Intent(MainActivity.this, Register.class));
-                    break;
+                        break;
                 }
 
 
@@ -157,23 +164,26 @@ public class MainActivity extends AppCompatActivity {
         google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn();
+                Intent intent = googleSignInClient.getSignInIntent();
+                startActivityForResult(intent, 100);
+                overridePendingTransition(0, 0);
 
 
 
 
             }
         });
+
         box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!isChecked) {
                     // show password
                     password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                   // password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    // password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else {
                     // hide password
-                  //  password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    //  password.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 }
 
@@ -182,72 +192,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signIn(){
-      //  Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-      //  startActivityForResult(signInIntent, RC_SIGN_IN);
+        //  Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        //  startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RC_SIGN_IN){
-        //    Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-        //    handleSignInResult(task);
-        }
-    }
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask){
-        try{
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            //    handleSignInResult(task);
+            if(task.isSuccessful()){
+                String s = "Google Sign In ";
+                displayToast(s);
+                try {
+                    GoogleSignInAccount googleSignInAccount = task.getResult(ApiException.class);
+                    if(googleSignInAccount != null) {
+                        AuthCredential ac = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+                        fAuth.signInWithCredential(ac).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()){
+                                    startActivity(new Intent(MainActivity.this,LoginActivity.class).addFlags((Intent.FLAG_ACTIVITY_NO_ANIMATION)));
+                                }
+                                else {
+                                    displayToast("Error");
+                                }
 
-            GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
-            Toast.makeText(MainActivity.this,"Signed In Successfully",Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(acc);
-        }
-        catch (ApiException e){
-            Toast.makeText(MainActivity.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
-            FirebaseGoogleAuth(null);
-        }
-    }
-
-    private void FirebaseGoogleAuth(GoogleSignInAccount acct) {
-        //check if the account is null
-        if (acct != null) {
-            AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-            fAuth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-                        FirebaseUser user = fAuth.getCurrentUser();
-                        updateUI(user);
-                    } else {
-                        Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                        updateUI(null);
+                            }
+                        });
                     }
+                } catch (ApiException e) {
+                    e.printStackTrace();
                 }
-            });
-        }
-        else{
-            Toast.makeText(MainActivity.this, "acc failed", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-    private void updateUI(FirebaseUser fUser){
-        startActivity(new Intent(MainActivity.this, Dashboard.class));
-        //btnSignOut.setVisibility(View.VISIBLE);
-    //
-        //
-        //    GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-        /*
-        if(account !=  null){
-            String personName = account.getDisplayName();
-            String personGivenName = account.getGivenName();
-            String personFamilyName = account.getFamilyName();
-            String personEmail = account.getEmail();
-            String personId = account.getId();
-            Uri personPhoto = account.getPhotoUrl();
 
-            Toast.makeText(MainActivity.this,personName + personEmail ,Toast.LENGTH_SHORT).show();
-        }
-
-         */
-
-    }
+    private void displayToast(String s) {
+        Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT).show();
     }
 
+
+}

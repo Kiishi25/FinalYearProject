@@ -18,18 +18,20 @@ RelativeLayout goals;
     RelativeLayout profile;
     RelativeLayout journal;
     RelativeLayout moodHistory;
+    RelativeLayout chat;
 
 
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.dashboard, container, false);
-        goals = (RelativeLayout) rootView.findViewById(R.id.chat);
+        goals = (RelativeLayout) rootView.findViewById(R.id.goals);
 
         mood = (RelativeLayout) rootView.findViewById(R.id.mood);
         history = (RelativeLayout) rootView.findViewById(R.id.sleep);
         profile = (RelativeLayout) rootView.findViewById(R.id.profile);
         journal = (RelativeLayout) rootView.findViewById(R.id.journal);
         moodHistory = (RelativeLayout) rootView.findViewById(R.id.moodHistory);
+        chat = (RelativeLayout) rootView.findViewById(R.id.chat);
 
 
 
@@ -40,6 +42,14 @@ RelativeLayout goals;
                 Intent intent = new Intent(getActivity(), GoalActivity.class);
                 startActivity(intent);
               //  onBackPressed();
+            }
+        });
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Chatbot.class);
+                startActivity(intent);
+                //  onBackPressed();
             }
         });
         moodHistory.setOnClickListener(new View.OnClickListener() {

@@ -54,7 +54,7 @@ public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.Vi
         holder.period.setText("Period:" + " " + model.getPeriod());
        // holder.period.setText("type:" + " " + model.getType());
        /// holder.period.setText("type:" + " " + model.getType());
-        holder.num.setText("type:" + " " + model.getNumber());
+        holder.num.setText("Target:" + " " + model.getTarget() + " "+ model.getMeasure());
         holder.id.setText( model.getId());
 
 holder.itemView.setOnClickListener(new View.OnClickListener() {

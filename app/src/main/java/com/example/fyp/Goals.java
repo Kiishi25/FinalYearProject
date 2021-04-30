@@ -7,7 +7,7 @@ public class Goals {
 
     public String names;
     public String period;
-    public Integer number;
+    public int target;
 public String id;
     public String startDate;
     public String endDate;
@@ -33,10 +33,10 @@ public String id;
         this.measure = measure;
     }
 
-    public Goals(String id, String names, String period, Integer number, String type, String startDate, String endDate, String measure) {
+    public Goals(String id, String names, String period, int target, String type, String startDate, String endDate, String measure) {
         this.names = names;
         this.period = period;
-        this.number = number;
+        this.target = target;
         this.type = type;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -76,9 +76,7 @@ public String id;
         this.endDate = endDate;
     }
 
-    public Integer getNumber() {
-        return number;
-    }
+
     public String getType() {
         return type;
     }
@@ -89,12 +87,14 @@ public String id;
         this.type = type;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+
+    public int getTarget() {
+        return target;
     }
 
-
-
+    public void setTarget(int target) {
+        this.target = target;
+    }
 
     public void setNames(String names) {
         this.names = names;

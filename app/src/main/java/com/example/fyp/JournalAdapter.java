@@ -31,7 +31,7 @@ public class JournalAdapter  extends FirebaseRecyclerAdapter<Journal, JournalAda
     @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull JournalAdapter.ViewHolder holder, int position, @NonNull Journal model) {
-        holder.name.setText( "Name:" + " " + model.getDidWell());
+        holder.grate.setText( "Grateful:" + " " + model.getGrateful());
 
     }
 
@@ -42,13 +42,16 @@ public class JournalAdapter  extends FirebaseRecyclerAdapter<Journal, JournalAda
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
+        TextView grate;
         TextView period;
         TextView type;
         TextView id;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            grate = (TextView)itemView.findViewById(R.id.grateful);
+
+
         }
     }
 }

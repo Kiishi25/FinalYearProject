@@ -74,7 +74,7 @@ public class IntroActivity extends AppCompatActivity {
         final List<ScreenItem> mList = new ArrayList<>();
         mList.add(new ScreenItem("Self care App", "Every day, you record your mood within the application. ", R.drawable.intro));
         mList.add(new ScreenItem("Choose Your Mood", "The mood is set for an entire day, but at any point during a day, you can reopen the app to change your mood!", R.drawable.img1));
-        mList.add(new ScreenItem("Mood Journal", "In the bottom left of the screen, a button will let you add a custom note to the mood. When you press it, a pop-up will be displayed with a text zone and a keyboard so you can enter your note. ", R.drawable.mood));
+        mList.add(new ScreenItem("Mood Journal", "You can enter customer journal entries. ", R.drawable.mood));
       //  mList.add(new ScreenItem("Share Your Mood", "You can share your daily mood with a friend through social media and others(ex. via SMS or email)", R.drawable.screenshot_3));
         mList.add(new ScreenItem("View Your Mood History", "On the mood history screen, moods will be shown!", R.drawable.barchat));
 
