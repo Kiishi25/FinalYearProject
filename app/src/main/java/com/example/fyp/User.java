@@ -2,14 +2,14 @@ package com.example.fyp;
 
 public class User {
 
-    private String Fname;
+    private String fname;
     private String email;
-    private String Lname;
+    private String lname;
 
 
-    public User(String Fname,String Lname, String email){
-        this.Fname = Fname;
-        this.Lname = Lname;
+    public User(String fname,String lname, String email){
+        this.fname = fname;
+        this.lname = lname;
         this.email = email;
 
     }
@@ -18,18 +18,18 @@ public class User {
 
 
     }
-    public void setFName(String name) {
-        this.Fname = name;
+    public void setfName(String name) {
+        this.fname = name;
     }
 
 
 
     public String getFName() {
-        return Fname;
+        return fname;
     }
 
     public String getLname() {
-        return Lname;
+        return fname;
     }
 
     public String getEmail() {

@@ -71,10 +71,13 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
 
           switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
+              case R.id.home:
+                  Intent intent = new Intent(LoginActivity.this, AddJournalActivity.class);
+                  startActivity(intent);
            case R.id.logout:
                 fAuth.getInstance().signOut();
                 finish();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 
                 break;

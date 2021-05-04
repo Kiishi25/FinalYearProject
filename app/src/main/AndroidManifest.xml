@@ -34,7 +34,8 @@
         <activity android:name=".AddJournalActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MoodActivity" />
+                android:value=".MoodActivity"
+               />
         </activity>
         <activity android:name=".MoodActivity">
             <meta-data
@@ -57,11 +58,12 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.FullScreen" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Register" />
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.FullScreen" />
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

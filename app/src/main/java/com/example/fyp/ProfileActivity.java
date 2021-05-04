@@ -3,6 +3,7 @@ package com.example.fyp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,6 +32,10 @@ public class ProfileActivity extends AppCompatActivity {
         assert rUser != null;
         String userId = rUser.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+
+        Log.i("userID", userId);
+
+
 
 
 

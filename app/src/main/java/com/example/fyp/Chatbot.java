@@ -43,6 +43,7 @@ public class Chatbot extends AppCompatActivity implements BotReply {
     SharedPreferences sharedpreferences;
     //dialogFlow
     private SessionsClient sessionsClient;
+
     private SessionName sessionName;
     private String uuid = UUID.randomUUID().toString();
     private String TAG = "chatbot";
@@ -66,6 +67,7 @@ public class Chatbot extends AppCompatActivity implements BotReply {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override public void onClick(View view) {
                 String message = editMessage.getText().toString();
+                Log.i("Value", message);
                 if (!message.isEmpty()) {
                     messageList.add(new Message(message, false));
                     editMessage.setText("");

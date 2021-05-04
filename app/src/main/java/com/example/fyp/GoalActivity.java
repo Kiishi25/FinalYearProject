@@ -365,6 +365,7 @@ public class GoalActivity extends AppCompatActivity {
         // Submit
         databaseGoalInfo.child(goalId).setValue(goalInfo);
         Toast.makeText(GoalActivity.this, "Database Updated", Toast.LENGTH_SHORT).show();
+        //setContentView(R.layout.retrieved_layout);
     }
 
 

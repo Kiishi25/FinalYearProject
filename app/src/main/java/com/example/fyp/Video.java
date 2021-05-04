@@ -2,42 +2,22 @@ package com.example.fyp;
 
 public class Video {
 
-    private String title;
-    private Long id;
-    private String videoId;
-    private String imageUrl;
+    String videoUrl;
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Video() {
+
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public Video(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
-    public String getTitle() {
-        return title;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(String videoId) {
-        this.videoId = videoId;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 }
-
 

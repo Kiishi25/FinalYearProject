@@ -122,6 +122,8 @@ public class MoodHistoryActivity extends AppCompatActivity {
 
 
                 }
+
+
                 ArrayList<BarEntry> entries = new ArrayList<>();
                 final ArrayList<String> labels = new ArrayList<String>();
 

@@ -1,38 +1,67 @@
 package com.example.fyp;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+import java.util.List;
 
+public class Adapter extends RecyclerView.Adapter<Adapter.VideoViewHolder> {
 
-    @NonNull
-    @Override
-    public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    List<Video> youtubeVideoList;
+
+    public Adapter() {
+    }
+
+    public Adapter(List<Video> youtubeVideoList) {
+        this.youtubeVideoList = youtubeVideoList;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter.ViewHolder holder, int position) {
+    public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from( parent.getContext()).inflate(R.layout.item_video_list, parent, false);
+
+        return new VideoViewHolder(view);
 
     }
+
+    @Override
+    public void onBindViewHolder(VideoViewHolder holder, int position) {
+
+        holder.videoWeb.loadData( youtubeVideoList.get(position).getVideoUrl(), "text/html" , "utf-8" );
+
+    }
+
 
     @Override
     public int getItemCount() {
-        return 0;
+        return youtubeVideoList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class VideoViewHolder extends RecyclerView.ViewHolder{
 
+        WebView videoWeb;
 
-        public ViewHolder(@NonNull View itemView) {
+        public VideoViewHolder(View itemView) {
             super(itemView);
+
+            videoWeb = (WebView) itemView.findViewById(R.id.videoWebView);
+
+            videoWeb.getSettings().setJavaScriptEnabled(true);
+            videoWeb.setWebChromeClient(new WebChromeClient() {
+
+
+            } );
         }
     }
 }
+
 
 

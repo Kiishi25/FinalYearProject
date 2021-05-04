@@ -161,8 +161,8 @@ FirebaseUser rUser = fAuth.getCurrentUser();
                             myRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("userId",userId);
-                            hashMap.put("first",name);
-                            hashMap.put("last", lastName);
+                            hashMap.put("fname",name);
+                            hashMap.put("Lname", lastName);
                             hashMap.put("email", email);
 
 myRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -272,7 +272,8 @@
                             android:layout_marginBottom="5dp"
                             android:padding="10dp"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/ic_meditation"/>
+                            android:src="@drawable/ic_meditation"
+                           />
 
                         <TextView
                             android:id="@+id/textView18"

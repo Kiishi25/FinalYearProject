@@ -3,6 +3,7 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,18 +38,22 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AddJournalActivity extends AppCompatActivity {
-    EditText grateful;
+    EditText grate;
     Toolbar toolbar;
-    EditText reason;
-     RecyclerView recyclerView;
+    EditText reasons;
+    private RecyclerView recycler;
     EditText today;
     EditText different;
     FirebaseAuth fAuth;
-    private JournalAdapter adapter;
+    private JournalAdapter adapt;
     DatabaseReference myRef;
-    FloatingActionButton save;
+   // FloatingActionButton save;
     FloatingActionButton create;
     Button submit;
+    String g;
+    String d;
+    String r;
+    String t;
 
 
     Calendar c;
@@ -57,7 +62,7 @@ public class AddJournalActivity extends AppCompatActivity {
     private String key = "";
     private String task;
     private String description;
-
+DrawerLayout draw;
 
 
 
@@ -66,17 +71,16 @@ public class AddJournalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.journal);
 
-        recyclerView = findViewById(R.id.rv);
+        recycler = findViewById(R.id.recy);
 
 
-        grateful = (EditText) findViewById(R.id.grateful);
-        reason = (EditText) findViewById(R.id.reason);
-        different = (EditText) findViewById(R.id.different);
-        today = (EditText) findViewById(R.id.today);
-        save = findViewById(R.id.save);
-        submit = (Button) findViewById(R.id.st);
+
+
+       // save = findViewById(R.id.save);
+     //   submit = (Button) findViewById(R.id.savee);
         create = findViewById(R.id.fabb);
-
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(myToolbar);
         fAuth = FirebaseAuth.getInstance();
         FirebaseUser rUser = fAuth.getCurrentUser();
         assert rUser != null;
@@ -92,7 +96,7 @@ public class AddJournalActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         //  recyclerView.setHasFixedSize(true);
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recycler.setLayoutManager(linearLayoutManager);
         myRef = FirebaseDatabase.getInstance().getReference("Journal").child(userId);
 
         FirebaseRecyclerOptions<Journal> options
@@ -103,10 +107,10 @@ public class AddJournalActivity extends AppCompatActivity {
         // Connecting object of required Adapter class to
         // the Adapter class itself
 
-        adapter = new JournalAdapter(options);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setVisibility(View.VISIBLE);
-        adapter.notifyDataSetChanged();
+        adapt = new JournalAdapter(options);
+        recycler.setAdapter(adapt);
+        recycler.setVisibility(View.VISIBLE);
+        adapt.notifyDataSetChanged();
 
 
         //  fAuth = FirebaseAuth.getInstance();
@@ -114,6 +118,31 @@ public class AddJournalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.activity_add_journal);
+                Button submit;
+                submit = (Button) findViewById(R.id.savee);
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        grate = (EditText) findViewById(R.id.grateful);
+                        g = grate.getText().toString().trim();
+                        reasons = (EditText) findViewById(R.id.reason);
+                        r = reasons.getText().toString();
+                        today = (EditText) findViewById(R.id.today);
+                        t = today.getText().toString();
+                        different = (EditText) findViewById(R.id.different);
+                        d = different.getText().toString();
+
+
+
+
+
+
+                        addJournal(g,r,d,t);
+                    }
+                });
+
+
+
 
             }
 
@@ -132,7 +161,8 @@ public class AddJournalActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case R.id.save:
-               addJournal(grateful.getText().toString(), reason.getText().toString(), different.getText().toString(),today.getText().toString());
+//               addJournal(grate.getText().toString(), reasons.getText().toString(), different.getText().toString(),today.getText().toString());
+                Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
                 onBackPressed();
                 break;
 
@@ -151,7 +181,7 @@ public class AddJournalActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void addJournal(String grateful, String reason, String different, String today) {
+    private void addJournal(String g, String r, String d, String t) {
         FirebaseUser rUser = fAuth.getCurrentUser();
         assert rUser != null;
         String userId = rUser.getUid();
@@ -160,13 +190,16 @@ public class AddJournalActivity extends AppCompatActivity {
         Log.d("DATE", "Date: "+todaysDate);
         currentTime = pad(c.get(Calendar.HOUR))+":"+pad(c.get(Calendar.MINUTE));
         Log.d("TIME", "Time: "+currentTime);
-        myRef = FirebaseDatabase.getInstance().getReference("Journal").child(userId);
+        String journalId = myRef.child(fAuth.getUid()).push().getKey();
+        myRef = FirebaseDatabase.getInstance().getReference("Journal").child(userId).child(journalId);
         HashMap<String, String> hashMap = new HashMap<>();
+       // String journalId = myRef.child(fAuth.getUid()).push().getKey();
+        hashMap.put("journal",journalId);
         hashMap.put("userId",userId);
-        hashMap.put("grateful",grateful);
-        hashMap.put("reason", reason);
-        hashMap.put("different", different);
-        hashMap.put("today", today);
+        hashMap.put("grateful",g);
+        hashMap.put("reason", r);
+        hashMap.put("different", d);
+        hashMap.put("today", t);
         hashMap.put("date", todaysDate);
 
 
@@ -177,6 +210,7 @@ public class AddJournalActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(AddJournalActivity.this, "okay!!",
                             Toast.LENGTH_SHORT).show();
+                    setContentView(R.layout.retrieved_layout_journal);
 
                    // startActivity(new Intent(AddJournalActivity.this, MainActivity.class));
                 }
@@ -184,6 +218,7 @@ public class AddJournalActivity extends AppCompatActivity {
 
                     Toast.makeText(AddJournalActivity.this, "error!!",
                             Toast.LENGTH_SHORT).show();
+
                   //  progressBar.setVisibility(View.GONE);
                 }
             }

@@ -2,6 +2,7 @@ package com.example.fyp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,25 +22,29 @@ public class JournalAdapter  extends FirebaseRecyclerAdapter<Journal, JournalAda
     private String TAG = "History";
     private List<Journal> journalList;
     private Context context;
-    private Button goals;
     public JournalAdapter (FirebaseRecyclerOptions<Journal>  journalList) {
         super(journalList);
-        //  this.goalList = goalList;
-        //  goalList = new FirebaseRecyclerOptions<Goals>();
+
+    }
+
+
+
+    @NonNull
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.retrieved_layout_journal, parent, false);
+        return new JournalAdapter.ViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull JournalAdapter.ViewHolder holder, int position, @NonNull Journal model) {
         holder.grate.setText( "Grateful:" + " " + model.getGrateful());
+        Log.i("Tracked Goal Acc", model.getToday());
 
     }
 
-    @NonNull
-    public JournalAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.retrieved_layout_journal, parent, false);
-        return new JournalAdapter.ViewHolder(view);
-    }
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView grate;
@@ -49,7 +54,7 @@ public class JournalAdapter  extends FirebaseRecyclerAdapter<Journal, JournalAda
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            grate = (TextView)itemView.findViewById(R.id.grateful);
+            grate = (TextView)itemView.findViewById(R.id.gg);
 
 
         }

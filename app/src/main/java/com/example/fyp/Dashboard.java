@@ -19,6 +19,8 @@ RelativeLayout goals;
     RelativeLayout journal;
     RelativeLayout moodHistory;
     RelativeLayout chat;
+    RelativeLayout meditation;
+
 
 
 
@@ -32,6 +34,7 @@ RelativeLayout goals;
         journal = (RelativeLayout) rootView.findViewById(R.id.journal);
         moodHistory = (RelativeLayout) rootView.findViewById(R.id.moodHistory);
         chat = (RelativeLayout) rootView.findViewById(R.id.chat);
+        meditation = (RelativeLayout) rootView.findViewById(R.id.meditation);
 
 
 
@@ -42,6 +45,14 @@ RelativeLayout goals;
                 Intent intent = new Intent(getActivity(), GoalActivity.class);
                 startActivity(intent);
               //  onBackPressed();
+            }
+        });
+        meditation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MeditationActivity.class);
+                startActivity(intent);
+                //  onBackPressed();
             }
         });
         chat.setOnClickListener(new View.OnClickListener() {

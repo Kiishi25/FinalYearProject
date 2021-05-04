@@ -3,6 +3,7 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -56,14 +57,15 @@ public class GoalHistoryActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     int feeling;
     String date;
-    TrackedGoals trackedg;
+    TrackedGoals mood;
 
     // ValueEventListener valueEventListener;
     ArrayList<Integer> array2; //array for mood value
     ArrayList<String> array7; //array for date
     private String TAG = "History";
     BarChart barChart;
-    private ArrayList<TrackedGoals> goalArray;
+    private ArrayList<TrackedGoals> MoodArray;
+    private DrawerLayout drawer;
 
 
 
@@ -77,8 +79,8 @@ public class GoalHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mood_history);
         // mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
         fAuth = FirebaseAuth.getInstance();
-        barChart = (BarChart) findViewById(R.id.bar);
-        goalArray = new ArrayList<TrackedGoals>();
+        barChart = (BarChart) findViewById(R.id.barchart);
+        MoodArray = new ArrayList<TrackedGoals>();
 
         FirebaseUser rUser = fAuth.getCurrentUser();
         assert rUser != null;
@@ -94,20 +96,20 @@ public class GoalHistoryActivity extends AppCompatActivity {
 
                     //  String id = Integer.parseInt(ds.child("feel").getValue().toString());
                     String value = String.valueOf(ds.child("date").getValue());
-                      String id = ds.child("date").getValue().toString();
-
+                    //   int feel = Integer.parseInt(String.valueOf(ds.child("feel").getValue()));
                     //   String name = data1.child("type").getValue().toString();
-                    trackedg = new TrackedGoals(value);
+                    int values = Integer.parseInt(ds.child("value").getValue().toString());
+                    mood = new TrackedGoals(value, values);
                     // goalsArray.add(goals);
                     //goalsArray.add(goals);
                     //  hashSet.add(goals);
                     /// Goals goal= data1.getValue(Goals.class);
                     //  hashSet.add(goal.getType());
 
-                    goalArray.add(trackedg);
+                    MoodArray.add(mood);
 
-                    Log.i("id", id);
-                   // Log.i("ni", String.valueOf(feel));
+                    Log.i("id", value);
+                    Log.i("ni", String.valueOf(values));
                     //   Log.i("id", String.valueOf(feel));
 
 
@@ -115,11 +117,12 @@ public class GoalHistoryActivity extends AppCompatActivity {
                 ArrayList<BarEntry> entries = new ArrayList<>();
                 final ArrayList<String> labels = new ArrayList<String>();
 
-                for (int i = 0; i < goalArray.size(); i++) {
-                    String date = goalArray.get(i).getDate();
-                    int value = goalArray.get(i).getValue();
+                for (int i = 0; i < MoodArray.size(); i++) {
+                    String date = MoodArray.get(i).getDate();
+                    int value = MoodArray.get(i).getValue();
                     entries.add(new BarEntry(value, i));
                     labels.add(date);
+                    Log.i("label", String.valueOf(labels));
                     Log.i("Date", String.valueOf(date));
                     Log.i("Feel", String.valueOf(value));
                 }
@@ -127,7 +130,8 @@ public class GoalHistoryActivity extends AppCompatActivity {
                 BarData data = new BarData(labels, bardataset);
                 barChart.setData(data); // set the data and list of labels into chart
                 barChart.setDescription("Mood Graph");  // set the description
-                bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                bardataset.setColors(new int[]{Color.RED, Color.GREEN, Color.GRAY, Color.BLACK, Color.BLUE});
+                ;
                 barChart.animateY(5000);
             }
 
@@ -193,6 +197,6 @@ public class GoalHistoryActivity extends AppCompatActivity {
 
     }
 
-}
 
+}
 
