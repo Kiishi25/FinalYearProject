@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+//import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -71,9 +73,12 @@ public class MoodHistoryActivity extends AppCompatActivity {
     ArrayList<Integer> array2; //array for mood value
     ArrayList<String> array7; //array for date
     private String TAG = "History";
-    BarChart barChart;
+    LineChart lineChart;
     private ArrayList<Mood> MoodArray;
     private DrawerLayout drawer;
+    ArrayList<Integer> colors = new ArrayList<Integer>();
+    int colourArray[] = {R.color.colorBlue,R.color.DarkerGrey, R.color.colorPrimary, R.color.bground_light_pink};
+    String [] legendName = { "Happy", "Sad", "Stressed"};
 
 
 
@@ -85,9 +90,14 @@ public class MoodHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood_history);
+
+        colors.add(ContextCompat.getColor(this, R.color.colorBlue));
+        colors.add(ContextCompat.getColor(this, R.color.DarkerGrey));
+        colors.add(ContextCompat.getColor(this, R.color.colorPrimary));
+        colors.add(ContextCompat.getColor(this, R.color.bground_light_pink));
        // mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
         fAuth = FirebaseAuth.getInstance();
-        barChart = (BarChart) findViewById(R.id.barchart);
+        lineChart = (LineChart) findViewById(R.id.linechart);
         MoodArray = new ArrayList<Mood>();
 
         FirebaseUser rUser = fAuth.getCurrentUser();
@@ -107,6 +117,7 @@ public class MoodHistoryActivity extends AppCompatActivity {
                     //   int feel = Integer.parseInt(String.valueOf(ds.child("feel").getValue()));
                     //   String name = data1.child("type").getValue().toString();
                     int values = Integer.parseInt(ds.child("feel").getValue().toString());
+
                     mood = new Mood(value, values);
                     // goalsArray.add(goals);
                     //goalsArray.add(goals);
@@ -124,7 +135,17 @@ public class MoodHistoryActivity extends AppCompatActivity {
                 }
 
 
-                ArrayList<BarEntry> entries = new ArrayList<>();
+                Legend l = lineChart.getLegend();
+               l.setEnabled(false);
+               l.setTextColor(Color.RED);
+               l.setForm(Legend.LegendForm.LINE);
+               l.setFormSize(10);
+              //  l.setCustom(new int[]{R.color.black,R.color.black,R.color.black}, new String[] { "Set1", "Set2", "Set3" });
+               //l.setCustom({R.color.black,R.color.black,R.color.black},{"Happy", "Sad", "Stressed"});
+
+            // LegendEntry legendEntryA = new LegendEntry();
+
+                ArrayList<Entry> entries = new ArrayList<>();
                 final ArrayList<String> labels = new ArrayList<String>();
 
                 for (int i = 0; i < MoodArray.size(); i++) {
@@ -136,17 +157,18 @@ public class MoodHistoryActivity extends AppCompatActivity {
                     Log.i("Date", String.valueOf(date));
                     Log.i("Feel", String.valueOf(value));
                 }
-                BarDataSet bardataset = new BarDataSet(entries, "Cells");
-                BarData data = new BarData(labels, bardataset);
-                barChart.setData(data); // set the data and list of labels into chart
-                barChart.setDescription("Mood Graph");  // set the description
-                bardataset.setColors(new int[]{Color.RED, Color.GREEN, Color.GRAY, Color.BLACK, Color.BLUE});
+                LineDataSet bardataset = new LineDataSet(entries, "Cells");
+                LineData data = new LineData(labels, bardataset);
+                lineChart.setData(data); // set the data and list of labels into chart
+                lineChart.setDescription("Mood Graph Overtime");  // set the description
+                bardataset.setColors(colors);
                 ;
-                barChart.animateY(5000);
+                lineChart.animateY(5000);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
 
             }
 
@@ -207,7 +229,39 @@ public class MoodHistoryActivity extends AppCompatActivity {
 
          }
 
+    private int[] getColors() {
 
+        // have as many colors as stack-values per entry
+        int[] colors = new int[3];
+
+     //   System.arraycopy(ColorTemplate.MATERIAL_COLORS, 0, colors, 0, 3);
+
+        return colors;
+    }
+    /*
+    public void setLegends(){
+
+        Legend l = lineChart.getLegend();
+
+        l.getEntries();
+
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+
+        l.setYEntrySpace(10f);
+
+        l.setWordWrapEnabled(true);
+
+        LegendEntry l1=new LegendEntry("Male",Legend.LegendForm.CIRCLE,10f,2f,null,Color.YELLOW);
+        LegendEntry l2=new LegendEntry("Female", Legend.LegendForm.CIRCLE,10f,2f,null,Color.RED);
+
+        l.setCustom(new LegendEntry[]{l1,l2});
+
+        l.setEnabled(true);
+
+    }
+
+     */
 }
+
 
 

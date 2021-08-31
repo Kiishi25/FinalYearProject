@@ -45,7 +45,7 @@ compactCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() 
     @Override
     public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
         String date = dayOfMonth + "" + month + year;
-        Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(CalenderActivity.this, MoodActivity.class));
     }

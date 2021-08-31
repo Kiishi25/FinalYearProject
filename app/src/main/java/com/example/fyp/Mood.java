@@ -5,6 +5,9 @@ public class Mood {
     String date;
     int feel;
     String reason;
+    String feeling;
+
+
 
     public Mood(String date, int feel) {
         this.date = date;
@@ -29,5 +32,12 @@ public class Mood {
 
     public void setDate(String date) {
         this.date = date;
+    }
+    public String getFeeling() {
+        return feeling;
+    }
+
+    public void setFeeling(String feeling) {
+        this.feeling = feeling;
     }
 }

@@ -37,7 +37,9 @@ public class GoalsAdapter extends FirebaseRecyclerAdapter<Goals, GoalsAdapter.Vi
 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.retrieved_layout, parent, false);
-        return new GoalsAdapter.ViewHolder(view);
+        ViewHolder holder = new ViewHolder((view));
+        return holder;
+       // return new GoalsAdapter.ViewHolder(view);
     }
 
 
@@ -78,12 +80,15 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
   //}
 
 
+
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView period;
         TextView type;
         TextView id;
         TextView num;
+        TextView date;
+        TextView value;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -102,6 +107,7 @@ holder.itemView.setOnClickListener(new View.OnClickListener() {
                     Context context = v.getContext();
                    Intent intent = new Intent(context, TrackedGoalActivity.class);
                     intent.putExtra("goalid",id.getText());
+                    intent.putExtra("type",name.getText());
                   context.startActivity(intent);
                }
             });

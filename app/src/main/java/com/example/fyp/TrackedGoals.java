@@ -1,5 +1,7 @@
 package com.example.fyp;
 
+import java.util.Comparator;
+
 public class TrackedGoals {
 
    private String date;
@@ -40,5 +42,13 @@ public class TrackedGoals {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+
+
+
+    public String toString()
+    {
+        return date + ", " + value + " ";
     }
 }

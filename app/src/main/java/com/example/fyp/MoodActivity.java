@@ -44,7 +44,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class MoodActivity extends AppCompatActivity implements SingleChoiceDialogFragment.SingleChoiceListener {
+public class MoodActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private DatabaseReference mRatingBarCh;
@@ -62,18 +62,26 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
     private TextView tvDisplayChoice;
     String weekDay;
     String stringdate;
+    Button submit;
+    Chip periodChip;
+    ChipGroup chg;
+    String periods;
+    String[] listItems;
+    HashMap<String, Object> hashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         tvDisplayChoice = findViewById(R.id.tvDisplayChoice);
 
         Button btnSelectChoice = findViewById(R.id.btnSelectChoice);
+    //    builder.setTitle("Select an Animal");
       //  mSmileRating = findViewById(R.id.ratingView);
         recyclerView = findViewById(R.id.recyclerView);
         //cause = findViewById(R.id.school);
-
+    submit = findViewById(R.id.submitMood);
         fAuth = FirebaseAuth.getInstance();
 
         // SmileRating smileRating = (SmileRating) findViewById(R.id.ratingView);
@@ -82,20 +90,65 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         add = findViewById(R.id.fab);
 
 
-
+        hashMap = new HashMap<>();
 
 
         tvDisplayChoice = findViewById(R.id.tvDisplayChoice);
+        FirebaseUser rUser = fAuth.getCurrentUser();
+        assert rUser != null;
+        String userId = rUser.getUid();
+
+        mRatingBarCh = FirebaseDatabase.getInstance().getReference("Mood").child(userId);
+        String key = mRatingBarCh.push().getKey();
+        mRatingBarCh = mRatingBarCh.child(key);
 
 
         btnSelectChoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment singleChoiceDialog = new SingleChoiceDialogFragment();
-                singleChoiceDialog.setCancelable(false);
-                singleChoiceDialog.show(getSupportFragmentManager(), "Single Choice Dialog");
+
+                listItems = new String[]{"Happy", "Excited", "Stressed","Sad","Nervous"};
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MoodActivity.this);
+                mBuilder.setTitle("Choose an item");
+                mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseUser rUser = fAuth.getCurrentUser();
+                        assert rUser != null;
+                        String userId = rUser.getUid();
+                        mRatingBarCh = FirebaseDatabase.getInstance().getReference("Mood").child(userId);
+
+                        mRatingBarCh.child("feel").setValue(i);
+                       // FirebaseDatabase.getInstance().getReference("Mood").child(userId);
+                        //hashMap.put("cause",cause);
+
+                        // tvDisplayChoice.setText(listItems.g);
+                        dialogInterface.dismiss();
+                    }
+                });
+                // Set the neutral/cancel button click listener
+                mBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do something when click the neutral button
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
+
             }
         });
+
+
+
+
+               // DialogFragment singleChoiceDialog = new SingleChoiceDialogFragment();
+                //singleChoiceDialog.setCancelable(false);
+               // singleChoiceDialog.show(getSupportFragmentManager(), "Single Choice Dialog");
+
+
 
 
         //   mRatingBarCh = FirebaseDatabase.getInstance().getReference();
@@ -103,10 +156,14 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         // String rating = Integer.toString(level);
         //   mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
         //    mRatingBarCh.child("Mood").setValue(rating);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
         Date date = new Date();
         Date newDate = new Date(date.getTime());
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
         stringdate = dt.format(newDate);
+
        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         c = Calendar.getInstance();
         weekDay = dayFormat.format(c.getTime());
@@ -119,28 +176,67 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         assert rUser != null;
         String userId = rUser.getUid();
 
-        ChipGroup chg = (ChipGroup) findViewById(R.id.moodChipGroup);
+     //    chg = findViewById(R.id.moodChipGroup);
        // int chipId = chg.getCheckedChipId();
-        Chip periodChip = (Chip) findViewById(chg.getCheckedChipId());
-        cause = periodChip.getText().toString();
+
+//        cause = periodChip.getText().toString();
+       // periodChip = findViewById(chg.getCheckedChipId());
+      //  chg = (ChipGroup) findViewById(R.id.moodChipGroup);
+       // int chipId = chg.getCheckedChipId();
+       // Chip periodChip = (Chip) findViewById(chg.getCheckedChipId());
+       // cause = periodChip.getText().toString();
 
         mRatingBarCh = FirebaseDatabase.getInstance().getReference("Mood").child(userId);
-        String key = mRatingBarCh.push().getKey();
-        mRatingBarCh = mRatingBarCh.child(key);
+     //  String key = mRatingBarCh.push().getKey();
+      //  mRatingBarCh = mRatingBarCh.child(key);
 
-        HashMap<String, Object> hashMap = new HashMap<>();
+      //  ChipGroup chgy = (ChipGroup) findViewById(R.id.moodChipGroup);
+        //   int chipIdd = chgy.getCheckedChipId();
+       // Chip moodChips =  findViewById(chgy.getCheckedChipId());
+        //cause = moodChips.getText().toString();
+      //  Log.i(TAG, "cause" + cause);
+     //   hashMap.put("date", stringdate);
+        //hashMap.put("cause",cause);
+
         // hashMap.put("timestamp", ServerValue.TIMESTAMP);
      //   hashMap.put("date", weekDay);
-       hashMap.put("date", stringdate);
-       hashMap.put("cause",cause);
+       //hashMap.put("date", stringdate);
+        hashMap.put("date", stringdate);
+        ChipGroup chgy = (ChipGroup) findViewById(R.id.moodChipGroup);
+        Chip moodChips =  findViewById(chgy.getCheckedChipId());
+        cause = moodChips.getText().toString();
+        hashMap.put("cause",cause);
 
+       //hashMap.put("cause",cause);
+       // submit.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View view) {
+               // ChipGroup chgy = (ChipGroup) findViewById(R.id.moodChipGroup);
+               // Chip moodChips =  findViewById(chgy.getCheckedChipId());
+            //    cause = moodChips.getText().toString();
+             //   hashMap.put("cause",cause);
+          //      Log.i(TAG, "cause" + cause);
+
+             //   public void onPositiveButtonClicked(String[] list, int position) {
+                    //mRatingBarCh.child("feel").setValue(position);
+
+
+             //   }
+
+
+
+                //Log.i("nice", cause);
+         //   }
+    //    });
 
         mRatingBarCh.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(MoodActivity.this, "ok!!",
-                            Toast.LENGTH_SHORT).show();
+
+
+                      Toast.makeText(MoodActivity.this, "ok!!",
+                       Toast.LENGTH_SHORT).show();
                     //   startActivity(new Intent(Register.this, MainActivity.class));
                 } else {
 
@@ -150,6 +246,9 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
                 }
             }
         });
+            }
+        });
+
         //  mRatingBarCh = FirebaseDatabase.getInstance().getReference("Journal").child(userId);
         // HashMap<String, String> hashMap = new HashMap<>();
         // mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
@@ -177,7 +276,7 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
         //   String userId = rUser.getUid();
         //  mRatingBarCh = FirebaseDatabase.getInstance().getReference("Mood").child(userId);
         //  mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
-        mRatingBarCh.child("Feeling").setValue(rating);
+     //   mRatingBarCh.child("Feeling").setValue(rating);
         //  mRatingBarCh.child("Mood");
         //   DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         // mRatingBarCh = (DatabaseReference) mRatingBarCh.child("Users").orderByChild("uid").equalTo(userId);
@@ -193,15 +292,8 @@ public class MoodActivity extends AppCompatActivity implements SingleChoiceDialo
     }
 
 
-    @Override
-    public void onPositiveButtonClicked(String[] list, int position) {
-        mRatingBarCh.child("feel").setValue(position);
 
 
-    }
 
-    @Override
-    public void onNegativeButtonClicked() {
 
-    }
 }

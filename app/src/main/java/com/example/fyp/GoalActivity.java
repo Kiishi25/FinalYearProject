@@ -1,18 +1,13 @@
 package com.example.fyp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,18 +15,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -44,20 +33,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.twigsntwines.daterangepicker.DatePickerSpinner;
-import com.twigsntwines.daterangepicker.DateRangePickedListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import devs.mulham.horizontalcalendar.HorizontalCalendar;
-import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 
 import static java.lang.System.out;
 
@@ -266,11 +245,15 @@ public class GoalActivity extends AppCompatActivity {
 
                         // Add new goal
                         sendUserData();
-                        //setContentView(R.layout.retrieved_layout);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        adapter.notifyDataSetChanged();
+                        setContentView(R.layout.activity_goal);
+
+                    //    GoalActivity.this.finish();
                     }
                 });
 
-
+                adapter.notifyDataSetChanged();
             }
 
         });
@@ -326,7 +309,7 @@ public class GoalActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.save_menu, menu);
+        inflater.inflate(R.menu.search_menu, menu);
         return true;
     }
 

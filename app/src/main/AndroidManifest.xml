@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MeditationActivity"></activity>
+        <activity android:name=".GraphActivity"></activity>
+        <activity android:name=".ButtonActivity" />
+        <activity android:name=".addJournalData" />
+        <activity android:name=".MeditationActivity" />
         <activity android:name=".ProfileViewActivity" />
         <activity android:name=".GoalHistoryActivity" />
         <activity android:name=".TrackedGoalActivity">
@@ -34,14 +37,9 @@
         <activity android:name=".AddJournalActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MoodActivity"
-               />
+                android:value=".MoodActivity" />
         </activity>
-        <activity android:name=".MoodActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SignUpActivity" />
-        </activity>
+        <activity android:name=".MoodActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".IntroActivity">
             <intent-filter>
@@ -58,9 +56,8 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Register" />
-
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />

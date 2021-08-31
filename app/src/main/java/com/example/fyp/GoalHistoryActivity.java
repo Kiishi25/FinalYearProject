@@ -53,73 +53,64 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GoalHistoryActivity extends AppCompatActivity {
-    DatabaseReference mRatingBarCh;
+    DatabaseReference trackedGoals;
     FirebaseAuth fAuth;
     int feeling;
     String date;
-    TrackedGoals mood;
+    TrackedGoals goal;
 
     // ValueEventListener valueEventListener;
     ArrayList<Integer> array2; //array for mood value
     ArrayList<String> array7; //array for date
     private String TAG = "History";
     BarChart barChart;
-    private ArrayList<TrackedGoals> MoodArray;
+    private ArrayList<TrackedGoals> GoalsArray;
     private DrawerLayout drawer;
-
-
-
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mood_history);
+        setContentView(R.layout.activity_button);
+
         // mRatingBarCh = FirebaseDatabase.getInstance().getReference().child("Mood");
+        /*
         fAuth = FirebaseAuth.getInstance();
-        barChart = (BarChart) findViewById(R.id.barchart);
-        MoodArray = new ArrayList<TrackedGoals>();
+        barChart = (BarChart) findViewById(R.id.lichart);
+        GoalsArray = new ArrayList<TrackedGoals>();
 
         FirebaseUser rUser = fAuth.getCurrentUser();
         assert rUser != null;
         final String userId = rUser.getUid();
 
 
-        mRatingBarCh =  FirebaseDatabase.getInstance().getReference("TrackedGoals").child(userId);
-        mRatingBarCh.addValueEventListener (new ValueEventListener() {
+        trackedGoals =  FirebaseDatabase.getInstance().getReference("TrackedGoals").child(userId);
+        trackedGoals.addValueEventListener (new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
 
-                    //  String id = Integer.parseInt(ds.child("feel").getValue().toString());
-                    String value = String.valueOf(ds.child("date").getValue());
-                    //   int feel = Integer.parseInt(String.valueOf(ds.child("feel").getValue()));
-                    //   String name = data1.child("type").getValue().toString();
+                    String date = String.valueOf(ds.child("date").getValue());
                     int values = Integer.parseInt(ds.child("value").getValue().toString());
-                    mood = new TrackedGoals(value, values);
-                    // goalsArray.add(goals);
-                    //goalsArray.add(goals);
-                    //  hashSet.add(goals);
-                    /// Goals goal= data1.getValue(Goals.class);
-                    //  hashSet.add(goal.getType());
+                    goal = new TrackedGoals(date, values);
 
-                    MoodArray.add(mood);
+                    Log.i(TAG, "Tracked" + date + values + userId) ;
+                    GoalsArray.add(goal);
 
-                    Log.i("id", value);
-                    Log.i("ni", String.valueOf(values));
-                    //   Log.i("id", String.valueOf(feel));
+
+
+
+
 
 
                 }
                 ArrayList<BarEntry> entries = new ArrayList<>();
                 final ArrayList<String> labels = new ArrayList<String>();
 
-                for (int i = 0; i < MoodArray.size(); i++) {
-                    String date = MoodArray.get(i).getDate();
-                    int value = MoodArray.get(i).getValue();
+                for (int i = 0; i < GoalsArray.size(); i++) {
+                    String date = GoalsArray.get(i).getDate();
+                    int value = GoalsArray.get(i).getValue();
                     entries.add(new BarEntry(value, i));
                     labels.add(date);
                     Log.i("label", String.valueOf(labels));
@@ -197,6 +188,9 @@ public class GoalHistoryActivity extends AppCompatActivity {
 
     }
 
+         */
 
+
+    }
 }
 
