@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
@@ -44,10 +45,19 @@ public class CalenderActivity extends AppCompatActivity {
 compactCalendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
     @Override
     public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-        String date = dayOfMonth + "" + month + year;
-        //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+   //     String date = dayOfMonth + "" + month + year;
+        String  curDate = String.valueOf(dayOfMonth);
+        String  Year = String.valueOf(year);
+        String  Month = String.valueOf(month);
 
-        startActivity(new Intent(CalenderActivity.this, MoodActivity.class));
+
+        Log.e("date",Year+"/"+Month+"/"+curDate);
+        //Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+        Intent i = new Intent(CalenderActivity.this, MoodActivity.class);
+        i.putExtra("date", Year+"/"+Month+"/"+curDate);
+        startActivity(i);
+
+       // startActivity(new Intent(CalenderActivity.this, MoodActivity.class));
     }
 
 });

@@ -26,6 +26,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 //import com.github.mikephil.charting.components.LegendEntry;
+//import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -37,9 +38,10 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
-import com.github.mikephil.charting.formatter.ValueFormatter;
+//import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -77,7 +79,7 @@ public class MoodHistoryActivity extends AppCompatActivity {
     private ArrayList<Mood> MoodArray;
     private DrawerLayout drawer;
     ArrayList<Integer> colors = new ArrayList<Integer>();
-    int colourArray[] = {R.color.colorBlue,R.color.DarkerGrey, R.color.colorPrimary, R.color.bground_light_pink};
+    int colourArray[] = {R.color.colorBlue,R.color.DarkerGrey, R.color.colorPrimary, R.color.bground_light_pink,R.color.bground_light_pink};
     String [] legendName = { "Happy", "Sad", "Stressed"};
 
 
@@ -134,12 +136,10 @@ public class MoodHistoryActivity extends AppCompatActivity {
 
                 }
 
+             //   List<LegendEntry> entriesd = new ArrayList<>();
 
-                Legend l = lineChart.getLegend();
-               l.setEnabled(false);
-               l.setTextColor(Color.RED);
-               l.setForm(Legend.LegendForm.LINE);
-               l.setFormSize(10);
+
+
               //  l.setCustom(new int[]{R.color.black,R.color.black,R.color.black}, new String[] { "Set1", "Set2", "Set3" });
                //l.setCustom({R.color.black,R.color.black,R.color.black},{"Happy", "Sad", "Stressed"});
 
@@ -158,9 +158,28 @@ public class MoodHistoryActivity extends AppCompatActivity {
                     Log.i("Feel", String.valueOf(value));
                 }
                 LineDataSet bardataset = new LineDataSet(entries, "Cells");
-                LineData data = new LineData(labels, bardataset);
-                lineChart.setData(data); // set the data and list of labels into chart
-                lineChart.setDescription("Mood Graph Overtime");  // set the description
+               bardataset.setColors(getColors());
+
+             //  bardataset.setStackLabels(new String[]{"CU1", "CU2"});
+             //   bardataset.setValueFormatter(new MyValueFormatter());
+                LineData data = new LineData(labels,bardataset);
+                lineChart.setData(data);
+
+                Legend l = lineChart.getLegend();
+              //  l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+              ///  l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+              //  l.setOrientation(Legend.LegendOrientation.VERTICAL);
+             //   l.setDrawInside(false);
+                l.setForm(Legend.LegendForm.CIRCLE);
+                l.setXEntrySpace(7f);
+                l.setYEntrySpace(0f);
+                l.setYOffset(0f);
+                l.setWordWrapEnabled(true);
+               //(false);
+                l.getCalculatedLineSizes();
+                lineChart.animateXY(2000,2000);
+                lineChart.invalidate();// set the data and list of labels into chart
+             //   lineChart.setDescription(getString(R.string.Text));  // set the description
                 bardataset.setColors(colors);
                 ;
                 lineChart.animateY(5000);

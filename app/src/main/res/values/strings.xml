@@ -52,6 +52,7 @@
     <string name="track_goals">Track Goals</string>
     <string name="value">Value</string>
     <string name="_0">0</string>
+    <string name="Text">Mood Graph Overtime</string>
     <string-array name="choice_items">
         <item>Happy</item>
         <item>Excited</item>
